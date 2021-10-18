@@ -1,6 +1,7 @@
 import { CoursesService } from './../services/courses.service';
 import { Component, OnInit } from '@angular/core';
 import { Course } from '../model/course';
+import { Observable } from 'rxjs';
 
 /*
   COMPONENTS
@@ -25,18 +26,19 @@ export class CoursesComponent implements OnInit {
 
 
   // Atributes
-  public courses: Course[] = [];
+  public courses: Observable<Course[]>;
   public displayedColumns: string[] = ['name', 'category'];
 
   // Injecao de Dependencias
 
 
   constructor(private coursesService: CoursesService) {
-
+    // carregado aqui por causa do mode STRICT deve ser no Construtor a inicializacao
+    this.courses = this.coursesService.listAllCourses();
   }
 
   ngOnInit(): void {
-    this.courses = this.coursesService.listAllCourses(); // carregado apenas como inicializado o COMPONENTE
+
   }
 
 }

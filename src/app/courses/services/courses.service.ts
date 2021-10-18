@@ -1,7 +1,7 @@
 import { HttpClient } from '@angular/common/http'; // Usado para fazer a conexao(buscar dados) com a API
 import { Injectable } from '@angular/core';
 import { Course } from '../model/course';
-
+import { delay, first, tap } from 'rxjs/operators';
 
 
 /*
@@ -25,15 +25,19 @@ import { Course } from '../model/course';
 })
 export class CoursesService {
 
+  private readonly API = '/assets/courses.json';
+
   constructor(private httpClient: HttpClient) { }
 
-  listAllCourses(): Course[] {
-    return [
-      { _id: '1', name: 'Angular 12', category: 'Frontend' },
-      { _id: '2', name: 'Java 13', category: 'Java' },
-      { _id: '3', name: 'Java 17', category: 'Java' },
-      { _id: '4', name: 'SpringBoot', category: 'Java' },
-    ];
+  listAllCourses() {
+    return this.httpClient
+               .get<Course[]>(this.API)
+               .pipe(
+                 first(), // pega apenas a primeira resposta e fecha a conexao
+                 delay(1500),
+                 tap(courses => console.log(courses))
+
+              );
 
   }
 }
