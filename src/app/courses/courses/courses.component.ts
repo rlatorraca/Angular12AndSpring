@@ -1,5 +1,20 @@
+import { CoursesService } from './../services/courses.service';
 import { Component, OnInit } from '@angular/core';
 import { Course } from '../model/course';
+
+/*
+  COMPONENTS
+  - Dentro do componentes:
+    a) Codigo necesario para renderizacao das telas
+    b) Validacoes basicas
+
+  SERVICES
+  - Dentro do service:
+    a) Tudo relacionado a DADOS
+    b) Tudo relacionado a MANIPULACAO DE DADOS
+    c) Passando (a) e (b) para os COMPONENTS
+
+*/
 
 @Component({
   selector: 'app-courses',
@@ -8,18 +23,20 @@ import { Course } from '../model/course';
 })
 export class CoursesComponent implements OnInit {
 
+
   // Atributes
-  public courses: Course[] = [
-    {_id: '1', name: 'Angular 12', category: 'Frontend'},
-    {_id: '2', name: 'Java 13', category: 'Java'},
-    {_id: '3', name: 'Java 17', category: 'Java'},
-    {_id: '4', name: 'SpringBoot', category: 'Java'},
-  ];
+  public courses: Course[] = [];
   public displayedColumns: string[] = ['name', 'category'];
 
-  constructor() { }
+  // Injecao de Dependencias
+
+
+  constructor(private coursesService: CoursesService) {
+
+  }
 
   ngOnInit(): void {
+    this.courses = this.coursesService.listAllCourses(); // carregado apenas como inicializado o COMPONENTE
   }
 
 }
