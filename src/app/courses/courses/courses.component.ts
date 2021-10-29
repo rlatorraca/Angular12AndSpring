@@ -26,7 +26,8 @@ export class CoursesComponent implements OnInit {
 
 
   // Atributes
-  public courses: Observable<Course[]>;
+  // Quando usamos o simbolo $ mostramos que o atributo é um Observable
+  public courses$: Observable<Course[]>;
   public displayedColumns: string[] = ['name', 'category'];
 
   // Injecao de Dependencias
@@ -34,7 +35,7 @@ export class CoursesComponent implements OnInit {
 
   constructor(private coursesService: CoursesService) {
     // carregado aqui por causa do mode STRICT deve ser no Construtor a inicializacao
-    this.courses = this.coursesService.listAllCourses();
+    this.courses$ = this.coursesService.listAllCourses();
   }
 
   ngOnInit(): void {
