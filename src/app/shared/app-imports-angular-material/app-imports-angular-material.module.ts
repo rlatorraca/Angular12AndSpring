@@ -2,6 +2,8 @@ import { NgModule } from '@angular/core';
 import { MatCardModule } from '@angular/material/card';
 import { MatTableModule } from '@angular/material/table';
 import { MatToolbarModule } from '@angular/material/toolbar';
+import {MatDialogModule} from '@angular/material/dialog';
+import {MatButtonModule} from '@angular/material/button';
 
 // Esse modulo serve como um CENTRALIZADOR de todos os IMPORTS do Angular MATERIAL, usado na aplicacao
 // => Nao precisamo da
@@ -14,7 +16,9 @@ import { MatToolbarModule } from '@angular/material/toolbar';
   exports: [
     MatCardModule,
     MatTableModule,
-    MatToolbarModule
+    MatToolbarModule,
+    MatDialogModule,
+    MatButtonModule
   ]
 })
 export class AppImportsAngularMaterialModule { }

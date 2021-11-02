@@ -1,7 +1,10 @@
 import { CoursesService } from './../services/courses.service';
 import { Component, OnInit } from '@angular/core';
 import { Course } from '../model/course';
-import { Observable } from 'rxjs';
+import { Observable, of } from 'rxjs';
+import { catchError } from 'rxjs/operators';
+import { MatDialog } from '@angular/material/dialog';
+import { ErrorDialogComponent } from '../../shared/components/error-dialog/error-dialog.component';
 
 /*
   COMPONENTS
@@ -32,13 +35,27 @@ export class CoursesComponent implements OnInit {
   // Injecao de Dependencias
 
 
-  constructor(private coursesService: CoursesService) {
+  constructor(
+    private coursesService: CoursesService,
+    public dialog: MatDialog) {
     // carregado aqui por causa do mode STRICT deve ser no Construtor a inicializacao
-    this.courses = this.coursesService.listAllCourses();
+    this.courses = this.coursesService.listAllCourses().pipe(
+      catchError(error => {
+        console.log(error);
+        this.openErrorDialog('Error loading !!!')
+        return of([]) ;
+      })
+    );
   }
 
   ngOnInit(): void {
 
+  }
+
+  openErrorDialog(errorMsg: string) {
+    this.dialog.open(ErrorDialogComponent,{
+      data: errorMsg
+    });
   }
 
 }
