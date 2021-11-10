@@ -2,21 +2,21 @@
   {
     "_id": "1",
     "name": "Angular 12",
-    "category": "Frontend"
+    "category": "frontend"
   },
   {
     "_id": "2",
-    "name": "Java 13",
-    "category": "Java"
+    "name": "Java 17",
+    "category": "language"
   },
   {
     "_id": "3",
-    "name": "Java 17",
-    "category": "Java"
+    "name": "Kubernetes",
+    "category": "devops"
   },
   {
     "_id": "4",
     "name": "SpringBoot",
-    "category": "Java"
+    "category": "java"
   }
 ]
